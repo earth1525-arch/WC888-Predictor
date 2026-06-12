@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ทายผลบอลโลก 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pitch: #0d3b24;
+    --pitch-deep: #082319;
+    --panel: #133f29;
+    --panel-light: #1a4d33;
+    --chalk: #f7f5ee;
+    --gold: #f4b730;
+    --gold-deep: #d99a12;
+    --line: rgba(247,245,238,0.12);
+    --muted: #aacbb8;
+
+    --S: #c0202b;
+    --A: #e07a17;
+    --B: #d9a521;
+    --C: #2e8b4e;
+    --D: #2255a4;
+    --E: #6b4ec2;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Sarabun','Noto Sans Thai',system-ui,sans-serif;
+    background:
+      repeating-linear-gradient(180deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 2px, transparent 2px, transparent 90px),
+      radial-gradient(circle at 50% -10%, rgba(244,183,48,0.10), transparent 45%),
+      linear-gradient(180deg, var(--pitch) 0%, var(--pitch-deep) 100%);
+    color: var(--chalk);
+    min-height:100vh;
+  }
+  .display{font-family:'Anton', sans-serif; letter-spacing:0.02em;}
+  .util{font-family:'Oswald', sans-serif; letter-spacing:0.08em; text-transform:uppercase;}
+
+  .wrap{max-width:920px; margin:0 auto; padding: 0 16px 60px;}
+
+  /* ===== TOP BAR ===== */
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 16px; max-width:920px; margin:0 auto;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand .ball{font-size:24px;}
+  .brand .name{font-size:18px; font-weight:700; letter-spacing:0.03em;}
+  .brand .name b{color:var(--gold);}
+  .nav-link{
+    color: var(--muted); text-decoration:none; font-size:13px;
+    border:1px solid var(--line); border-radius:999px; padding:8px 16px;
+    transition: border-color .15s, color .15s;
+  }
+  .nav-link:hover{color:var(--chalk); border-color: var(--gold);}
+
+  /* ===== HOME ===== */
+  .home-hero{
+    text-align:center; padding: 64px 16px 36px;
+  }
+  .home-hero .eyebrow{
+    color:var(--gold); font-size:12px; margin-bottom:14px;
+  }
+  .home-hero h1{
+    font-size: clamp(40px, 11vw, 84px);
+    margin:0; line-height:1.05; text-transform:uppercase;
+  }
+  .home-hero h1 .line2{display:block; color:var(--gold); -webkit-text-stroke: 0px;}
+  .home-hero p{color:var(--muted); margin:18px auto 0; max-width:480px; font-size:15px; line-height:1.7;}
+
+  .gate-row{
+    display:grid; grid-template-columns: 1fr 1fr; gap:20px;
+    max-width:680px; margin: 44px auto 0; padding: 0 16px;
+  }
+  @media(max-width:560px){.gate-row{grid-template-columns:1fr;}}
+
+  .gate{
+    position:relative;
+    display:flex; flex-direction:column; align-items:flex-start; justify-content:space-between;
+    text-decoration:none; color:var(--chalk);
+    border-radius:18px; padding:28px 24px;
+    min-height:170px;
+    border: 1px solid var(--line);
+    overflow:hidden;
+    transition: transform .18s ease, border-color .18s ease;
+  }
+  .gate:hover{transform: translateY(-4px);}
+  .gate .gnum{
+    font-family:'Anton',sans-serif; font-size:64px; opacity:0.18; position:absolute; top:8px; right:18px; line-height:1;
+  }
+  .gate .gtitle{font-family:'Anton',sans-serif; font-size:28px; text-transform:uppercase; z-index:1;}
+  .gate .gsub{font-size:13px; color:var(--muted); z-index:1; margin-top:6px;}
+  .gate .garrow{
+    align-self:flex-end; font-size:22px; z-index:1;
+    transition: transform .15s ease;
+  }
+  .gate:hover .garrow{transform: translateX(6px);}
+
+  .gate-play{
+    background: linear-gradient(135deg, #1d6b41, #0f4429);
+    border-color: rgba(244,183,48,0.35);
+  }
+  .gate-play:hover{border-color: var(--gold);}
+  .gate-board{
+    background: linear-gradient(135deg, #1a4d33, #0d3324);
+  }
+  .gate-board:hover{border-color: var(--chalk);}
+
+  .home-footer{
+    text-align:center; color:var(--muted); font-size:12px; margin-top:60px; line-height:1.8;
+  }
+
+  /* ===== SHARED CARD ===== */
+  .card{
+    background: var(--panel);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:24px;
+    margin:20px 0;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.30);
+  }
+  .card h2{
+    font-family:'Anton',sans-serif; text-transform:uppercase; font-size:24px;
+    margin:0 0 4px; letter-spacing:0.03em;
+  }
+  .card .lead{color:var(--muted); font-size:14px; margin:0 0 18px; line-height:1.7;}
+
+  /* ===== PROGRESS / STEP HEADER ===== */
+  .progress{
+    display:flex; align-items:center; justify-content:center; gap:0;
+    padding: 22px 16px 0; max-width:920px; margin:0 auto;
+  }
+  .progress .seg{
+    flex:1; display:flex; flex-direction:column; align-items:center; gap:8px; position:relative;
+  }
+  .progress .seg .dot{
+    width:34px; height:34px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Oswald',sans-serif; font-weight:700; font-size:14px;
+    border:2px solid var(--line); color:var(--muted);
+    background: var(--pitch-deep);
+    z-index:1;
+  }
+  .progress .seg.active .dot{border-color:var(--gold); color:var(--gold); background: rgba(244,183,48,0.12);}
+  .progress .seg.done .dot{border-color:var(--gold); color:var(--pitch-deep); background:var(--gold);}
+  .progress .seg .lbl{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; text-align:center;}
+  .progress .seg.active .lbl{color:var(--chalk);}
+  .progress .seg::before{
+    content:''; position:absolute; top:17px; left:0; right:0; height:2px; background:var(--line); z-index:0;
+  }
+  .progress .seg:first-child::before{left:50%;}
+  .progress .seg:last-child::before{right:50%;}
+  .progress .seg.done::before, .progress .seg.active::before{background: var(--gold);}
+
+  /* ===== RULES PAGE ===== */
+  .rules-block h3{
+    font-family:'Oswald',sans-serif; text-transform:uppercase; font-size:14px;
+    letter-spacing:0.08em; color:var(--gold); margin:24px 0 10px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .rules-block p{font-size:14px; line-height:1.8; color:var(--chalk); margin:0 0 8px;}
+  .rules-block ul{margin:6px 0 0; padding-left:20px; font-size:14px; line-height:1.8;}
+
+  .tier-block{
+    border:1px solid var(--line); border-radius:12px; margin-bottom:10px; overflow:hidden;
+  }
+  .tier-head{
+    display:flex; align-items:center; gap:12px; padding:12px 14px; font-weight:700;
+  }
+  .tier-badge{
+    width:36px; height:36px; border-radius:8px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Anton',sans-serif; font-size:16px; color:#fff;
+  }
+  .tier-S .tier-badge{background:var(--S);}
+  .tier-A .tier-badge{background:var(--A);}
+  .tier-B .tier-badge{background:var(--B); color:#2a1d00;}
+  .tier-C .tier-badge{background:var(--C);}
+  .tier-D .tier-badge{background:var(--D);}
+  .tier-E .tier-badge{background:var(--E);}
+  .tier-name{font-family:'Oswald',sans-serif; font-size:15px; text-transform:uppercase; letter-spacing:0.04em;}
+  .tier-name .sub{display:block; font-size:11px; color:var(--muted); text-transform:none; letter-spacing:0; font-family:'Sarabun',sans-serif; margin-top:2px;}
+  .tier-mult{
+    margin-left:auto; font-family:'Oswald',sans-serif; font-weight:700; font-size:13px;
+    padding:5px 12px; border-radius:999px; background:rgba(244,183,48,0.14); color:var(--gold); white-space:nowrap;
+  }
+  .team-grid{
+    display:grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap:8px;
+    padding:0 14px 14px;
+  }
+  .team-chip{
+    display:flex; align-items:center; gap:8px; padding:9px 12px; border-radius:10px;
+    border:1px solid var(--line); background:rgba(255,255,255,0.02); font-size:13.5px;
+  }
+  .team-chip .flag{font-size:18px;}
+
+  .points-table{width:100%; border-collapse:collapse; font-size:14px; margin-top:8px;}
+  .points-table th, .points-table td{
+    text-align:left; padding:9px 12px; border-bottom:1px solid var(--line);
+  }
+  .points-table th{color:var(--gold); font-family:'Oswald',sans-serif; text-transform:uppercase; font-size:11px; letter-spacing:0.08em;}
+  .points-table td.pts{font-weight:700; text-align:right; font-family:'Oswald',sans-serif;}
+
+  .formula-box{
+    margin-top:18px; padding:16px 18px; border-radius:12px;
+    background: linear-gradient(135deg, rgba(244,183,48,0.14), rgba(244,183,48,0.03));
+    border:1px solid rgba(244,183,48,0.25);
+    text-align:center; font-family:'Oswald',sans-serif; font-size:16px; letter-spacing:0.04em;
+  }
+  .formula-box b{color:var(--gold);}
+
+  .winner-box{
+    display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:14px;
+  }
+  @media(max-width:480px){.winner-box{grid-template-columns:1fr;}}
+  .winner-box .wcard{
+    border:1px solid var(--line); border-radius:12px; padding:14px 16px; font-size:13.5px; line-height:1.6;
+  }
+  .winner-box .wcard .rank{font-family:'Anton',sans-serif; font-size:20px; color:var(--gold);}
+
+  /* ===== BUTTONS ===== */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    background: var(--gold); color:#1a1100; border:none; border-radius:999px;
+    padding:14px 30px; font-size:15px; font-weight:700; font-family:'Oswald',sans-serif;
+    text-transform:uppercase; letter-spacing:0.06em; cursor:pointer;
+    transition: transform .12s, box-shadow .12s, opacity .15s;
+    box-shadow: 0 8px 22px rgba(244,183,48,0.25);
+    text-decoration:none;
+  }
+  .btn:hover{transform: translateY(-1px); box-shadow: 0 12px 26px rgba(244,183,48,0.35);}
+  .btn:disabled{opacity:.35; cursor:not-allowed; box-shadow:none; transform:none;}
+  .btn.secondary{
+    background:transparent; color:var(--chalk); border:1px solid var(--line); box-shadow:none;
+  }
+  .btn.secondary:hover{border-color:var(--gold); color:var(--gold); transform:none;}
+  .row-end{display:flex; justify-content:flex-end; margin-top:20px;}
+  .row-between{display:flex; justify-content:space-between; align-items:center; margin-top:20px; gap:12px; flex-wrap:wrap;}
+  .row-center{display:flex; justify-content:center; margin-top:20px;}
+
+  /* ===== FORM ===== */
+  input[type="text"]{
+    width:100%; background:var(--pitch-deep); border:1px solid var(--line); border-radius:10px;
+    padding:14px 16px; color:var(--chalk); font-size:16px; font-family:inherit; outline:none;
+    transition: border-color .15s;
+  }
+  input[type="text"]:focus{border-color:var(--gold);}
+  input[type="text"]::placeholder{color:#5f8a72;}
+  label.field-label{
+    display:block; font-family:'Oswald',sans-serif; text-transform:uppercase; font-size:12px;
+    letter-spacing:0.1em; color:var(--gold); margin-bottom:8px;
+  }
+
+  /* ===== TEAM PICKER (play page) ===== */
+  .team-pick{
+    display:flex; align-items:center; gap:10px; padding:11px 12px; border-radius:10px;
+    border:1px solid var(--line); background:rgba(255,255,255,0.02); cursor:pointer;
+    font-size:13.5px; transition: border-color .12s, background .12s; user-select:none;
+  }
+  .team-pick:hover{border-color: rgba(244,183,48,0.4);}
+  .team-pick.selected{border-color:var(--gold); background: rgba(244,183,48,0.10);}
+  .team-pick input{accent-color:var(--gold); width:16px; height:16px; flex-shrink:0;}
+  .team-pick .flag{font-size:18px;}
+  .team-pick .mult{margin-left:auto; font-size:11px; color:var(--muted); font-family:'Oswald',sans-serif;}
+  .pick-counter{
+    text-align:center; font-family:'Oswald',sans-serif; font-size:13px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--muted); margin-top:14px;
+  }
+  .pick-counter b{color:var(--gold); font-size:16px;}
+
+  /* ===== SUMMARY ===== */
+  .selection-list{list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:8px;}
+  .selection-list li{
+    display:flex; align-items:center; gap:12px; padding:13px 14px; border:1px solid var(--line);
+    border-radius:10px; background:rgba(255,255,255,0.02);
+  }
+  .selection-list .flag{font-size:24px;}
+  .selection-list .team-name{font-weight:600; font-size:15px;}
+  .selection-list .team-sub{font-size:12px; color:var(--muted);}
+  .selection-list .pill{
+    margin-left:auto; font-family:'Oswald',sans-serif; font-size:12px; font-weight:700;
+    padding:5px 12px; border-radius:999px; color:#fff; text-transform:uppercase;
+  }
+  .pill-S{background:var(--S);} .pill-A{background:var(--A);} .pill-B{background:var(--B); color:#2a1d00;}
+  .pill-C{background:var(--C);} .pill-D{background:var(--D);} .pill-E{background:var(--E);}
+
+  /* ===== LEADERBOARD ===== */
+  .lb-header{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:12px; flex-wrap:wrap;
+  }
+  .lb-updated{font-size:12px; color:var(--muted); font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:0.06em;}
+  .scoreboard{
+    width:100%; border-collapse:collapse; margin-top:14px; font-size:14px;
+  }
+  .scoreboard th{
+    text-align:left; padding:10px 10px; font-family:'Oswald',sans-serif; text-transform:uppercase;
+    font-size:11px; letter-spacing:0.08em; color:var(--gold); border-bottom:1px solid var(--line);
+  }
+  .scoreboard td{padding:12px 10px; border-bottom:1px solid var(--line);}
+  .scoreboard tr:last-child td{border-bottom:none;}
+  .scoreboard td.rank{
+    font-family:'Anton',sans-serif; font-size:18px; width:40px; text-align:center;
+  }
+  .scoreboard tr.r1 td.rank{color:var(--gold);}
+  .scoreboard tr.r2 td.rank{color:#cfd8e3;}
+  .scoreboard tr.r3 td.rank{color:#d99a5b;}
+  .scoreboard td.score{font-family:'Oswald',sans-serif; font-weight:700; text-align:right; color:var(--gold);}
+  .scoreboard td.teams{color:var(--muted); font-size:12px;}
+  .empty-state{text-align:center; color:var(--muted); font-size:14px; padding:30px 0; line-height:1.8;}
+  .prize-banner{
+    margin-top:18px; padding:14px 16px; border-radius:12px; font-size:13px; line-height:1.8;
+    background: linear-gradient(135deg, rgba(244,183,48,0.14), rgba(244,183,48,0.03));
+    border:1px solid rgba(244,183,48,0.25); color:var(--chalk);
+  }
+  .prize-banner b{color:var(--gold);}
+
+  .hidden{display:none !important;}
+
+  .view{display:none;}
+  .view.active{display:block;}
+
+  .footer-note{text-align:center; color:var(--muted); font-size:12px; margin-top:30px; line-height:1.8;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="#home" class="brand" style="text-decoration:none; color:var(--chalk);" onclick="goTo('home')">
+    <span class="ball">⚽</span>
+    <span class="name">World Cup <b>2026</b> · Tier Pick</span>
+  </a>
+  <a href="#home" class="nav-link" onclick="goTo('home')">หน้าหลัก</a>
+</div>
+
+<!-- ================= HOME ================= -->
+<div class="view active" id="view-home">
+  <div class="home-hero">
+    <div class="eyebrow util">PREDICTION GAME · WORLD CUP 2026</div>
+    <h1 class="display">ทายผลบอลโลก<span class="line2">2026</span></h1>
+    <p>เลือก 3 ทีมที่คุณเชื่อมั่น แต่ตัวคูณแต่ละเทียร์จะเปลี่ยนทุกอย่าง — ทีมเต็งให้ตัวคูณน้อย ทีมรองบ่อนให้ตัวคูณเยอะ ใครอ่านเกมขาดที่สุด รวยที่สุด</p>
+  </div>
+
+  <div class="gate-row">
+    <a href="#play" class="gate gate-play" onclick="goTo('play')">
+      <div class="gnum display">01</div>
+      <div>
+        <div class="gtitle">ร่วมสนุก</div>
+        <div class="gsub">อ่านกติกา เลือก 3 ทีม แล้วลงสนาม</div>
+      </div>
+      <div class="garrow">→</div>
+    </a>
+    <a href="#leaderboard" class="gate gate-board" onclick="goTo('leaderboard')">
+      <div class="gnum display">02</div>
+      <div>
+        <div class="gtitle">ตารางคะแนน</div>
+        <div class="gsub">อันดับผู้เล่นแบบเรียลไทม์</div>
+      </div>
+      <div class="garrow">→</div>
+    </a>
+  </div>
+
+  <div class="wrap">
+    <div class="home-footer">
+      ราคาต่อรองอ้างอิงตลาดเดิมพันหลายสำนัก (อัปเดต พ.ค. 2025) ใช้จัดเทียร์เพื่อความสนุกเท่านั้น<br>
+      ผลคะแนนจะอัปเดตหลังจบการแข่งขันของแต่ละวัน
+    </div>
+  </div>
+</div>
+
+<!-- ================= PLAY FLOW WRAPPER ================= -->
+<div class="view" id="view-play">
+  <div class="progress" id="progressBar">
+    <div class="seg" data-step="rules"><div class="dot">1</div><div class="lbl util">กติกา</div></div>
+    <div class="seg" data-step="pick"><div class="dot">2</div><div class="lbl util">เลือกทีม</div></div>
+    <div class="seg" data-step="result"><div class="dot">3</div><div class="lbl util">ตารางคะแนน</div></div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ---- PAGE 1: RULES ---- -->
+    <div class="card sub-view" id="sub-rules">
+      <h2>วิธีเล่นและกติกา</h2>
+      <p class="lead">อ่านให้ครบก่อนเลือกทีม — ตัวคูณของแต่ละเทียร์มีผลต่อคะแนนรวมของคุณโดยตรง</p>
+
+      <div class="rules-block">
+        <h3>🎯 การเลือกทีม</h3>
+        <p>ผู้เล่นต้องเลือกทีม <b style="color:var(--gold)">3 ทีมเท่านั้น</b> จากตารางเทียร์ด้านล่าง แต่ละเทียร์มีตัวคูณคะแนนต่างกัน — ทีมเต็งตัวคูณต่ำ ทีมรองบ่อนตัวคูณสูง เลือกผสมให้คุ้มที่สุด</p>
+
+        <h3>🏆 ตารางจัดเทียร์</h3>
+        <div id="tiersContainer"></div>
+
+        <h3>📊 ตารางคะแนนพื้นฐาน (ตามผลงานทีม)</h3>
+        <table class="points-table">
+          <tr><th>ผลงานของทีม</th><th>คะแนนพื้นฐาน</th></tr>
+          <tr><td>เข้ารอบ 32 ทีม</td><td class="pts">1</td></tr>
+          <tr><td>เข้ารอบ 16 ทีม</td><td class="pts">3</td></tr>
+          <tr><td>เข้ารอบ 8 ทีม</td><td class="pts">7</td></tr>
+          <tr><td>เข้ารอบรองชนะเลิศ</td><td class="pts">15</td></tr>
+          <tr><td>รองแชมป์</td><td class="pts">25</td></tr>
+          <tr><td>แชมป์</td><td class="pts">40</td></tr>
+        </table>
+
+        <h3>🧮 วิธีคิดคะแนน</h3>
+        <div class="formula-box">
+          คะแนนรวมต่อทีม = <b>คะแนนพื้นฐาน × ตัวคูณ Tier</b>
+        </div>
+
+        <h3>💰 ผู้ชนะ</h3>
+        <div class="winner-box">
+          <div class="wcard"><div class="rank">อันดับ 1</div>คะแนนรวมสูงสุด — ได้เงินรางวัลที่เหลือทั้งหมด</div>
+          <div class="wcard"><div class="rank">อันดับ 2</div>คะแนนรวมสูงสุดอันดับสอง — ได้เงินรางวัลเท่าค่าสมัคร</div>
+        </div>
+      </div>
+
+      <div class="row-end">
+        <button class="btn" onclick="showSub('pick')">เริ่มเลือกทีม →</button>
+      </div>
+    </div>
+
+    <!-- ---- PAGE 2: PICK TEAMS ---- -->
+    <div class="card sub-view hidden" id="sub-pick">
+      <h2>ลงชื่อ &amp; เลือก 3 ทีม</h2>
+      <p class="lead">กรอกชื่อของคุณ แล้วเลือกทีมที่เชื่อมั่นจากทุกเทียร์ — เลือกได้สูงสุด 3 ทีม</p>
+
+      <label class="field-label">ชื่อผู้เล่น</label>
+      <input type="text" id="playerName" placeholder="ชื่อของคุณ" maxlength="30">
+
+      <div id="pickTiers" style="margin-top:18px;"></div>
+
+      <div class="pick-counter">เลือกแล้ว <b id="pickCount">0</b> / 3 ทีม</div>
+
+      <div class="row-between">
+        <button class="btn secondary" onclick="showSub('rules')">← กลับไปอ่านกติกา</button>
+        <button class="btn" id="toReportBtn" disabled onclick="renderReport()">ดูรายงานการเลือก →</button>
+      </div>
+    </div>
+
+    <!-- ---- PAGE: REPORT (between pick & result) ---- -->
+    <div class="card sub-view hidden" id="sub-report">
+      <h2>รายงานการเลือกของคุณ</h2>
+      <p class="lead" id="reportName"></p>
+      <ul class="selection-list" id="reportList"></ul>
+
+      <div class="row-between">
+        <button class="btn secondary" onclick="showSub('pick')">← แก้ไขทีม</button>
+        <button class="btn" onclick="submitEntry()">✅ ยืนยันและไปดูตารางคะแนน</button>
+      </div>
+    </div>
+
+    <!-- ---- PAGE 3: LIVE RESULT ---- -->
+    <div class="card sub-view hidden" id="sub-result">
+      <div class="lb-header">
+        <div>
+          <h2 style="margin-bottom:6px;">ตารางคะแนนเรียลไทม์</h2>
+          <p class="lead" style="margin:0;">อันดับคะแนนรวมของผู้เล่นทุกคน อัปเดตหลังจบแข่งแต่ละวัน</p>
+        </div>
+        <div class="lb-updated" id="lastUpdated"></div>
+      </div>
+      <div id="scoreboardWrap"></div>
+      <div class="prize-banner">
+        🥇 <b>อันดับ 1</b> รับเงินรางวัลที่เหลือทั้งหมด &nbsp; · &nbsp; 🥈 <b>อันดับ 2</b> รับเงินรางวัลเท่าค่าสมัคร
+      </div>
+      <div class="row-center">
+        <button class="btn secondary" onclick="refreshLeaderboard()">🔄 รีเฟรชคะแนน</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= LEADERBOARD (from home button) ================= -->
+<div class="view" id="view-leaderboard">
+  <div class="wrap">
+    <div class="card">
+      <div class="lb-header">
+        <div>
+          <h2 style="margin-bottom:6px;">ตารางคะแนน</h2>
+          <p class="lead" style="margin:0;">อันดับคะแนนรวมของผู้เล่นทุกคนแบบเรียลไทม์</p>
+        </div>
+        <div class="lb-updated" id="lastUpdated2"></div>
+      </div>
+      <div id="scoreboardWrap2"></div>
+      <div class="prize-banner">
+        🥇 <b>อันดับ 1</b> รับเงินรางวัลที่เหลือทั้งหมด &nbsp; · &nbsp; 🥈 <b>อันดับ 2</b> รับเงินรางวัลเท่าค่าสมัคร
+      </div>
+      <div class="row-between">
+        <button class="btn secondary" onclick="goTo('home')">← หน้าหลัก</button>
+        <button class="btn secondary" onclick="refreshLeaderboard()">🔄 รีเฟรชคะแนน</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="footer-note">
+    ราคาต่อรองอ้างอิงตลาดเดิมพันหลายสำนัก (อัปเดต พ.ค. 2025) ใช้สำหรับจัดอันดับและความสนุกในเกมเท่านั้น ไม่ใช่คำแนะนำในการเดิมพัน
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   DATA
+========================================================= */
+const TIERS = [
+  { id:'S', name:'S TIER', sub:'เต็งแชมป์สุด', mult:1,
+    teams:[ {name:'Spain', th:'สเปน', flag:'🇪🇸'}, {name:'France', th:'ฝรั่งเศส', flag:'🇫🇷'} ] },
+  { id:'A', name:'A TIER', sub:'ลุ้นแชมป์จริง', mult:1.4,
+    teams:[ {name:'England', th:'อังกฤษ', flag:'🏴'}, {name:'Portugal', th:'โปรตุเกส', flag:'🇵🇹'}, {name:'Brazil', th:'บราซิล', flag:'🇧🇷'}, {name:'Argentina', th:'อาร์เจนตินา', flag:'🇦🇷'} ] },
+  { id:'B', name:'B TIER', sub:'Dark horse ระดับสูง', mult:2,
+    teams:[ {name:'Germany', th:'เยอรมนี', flag:'🇩🇪'}, {name:'Netherlands', th:'เนเธอร์แลนด์', flag:'🇳🇱'}, {name:'Belgium', th:'เบลเยียม', flag:'🇧🇪'} ] },
+  { id:'C', name:'C TIER', sub:'ม้ามืด', mult:4,
+    teams:[ {name:'Norway', th:'นอร์เวย์', flag:'🇳🇴'}, {name:'Colombia', th:'โคลอมเบีย', flag:'🇨🇴'}, {name:'Japan', th:'ญี่ปุ่น', flag:'🇯🇵'}, {name:'Mexico', th:'เม็กซิโก', flag:'🇲🇽'}, {name:'United States', th:'สหรัฐอเมริกา', flag:'🇺🇸'}, {name:'Uruguay', th:'อุรุกวัย', flag:'🇺🇾'}, {name:'Morocco', th:'โมร็อกโก', flag:'🇲🇦'} ] },
+  { id:'D', name:'D TIER', sub:'รองบ่อนมีลุ้นเซอร์ไพรส์', mult:7,
+    teams:[ {name:'Turkey', th:'ตุรกี', flag:'🇹🇷'}, {name:'Croatia', th:'โครเอเชีย', flag:'🇭🇷'}, {name:'Switzerland', th:'สวิตเซอร์แลนด์', flag:'🇨🇭'}, {name:'Austria', th:'ออสเตรีย', flag:'🇦🇹'}, {name:'Ecuador', th:'เอกวาดอร์', flag:'🇪🇨'}, {name:'Canada', th:'แคนาดา', flag:'🇨🇦'}, {name:'Senegal', th:'เซเนกัล', flag:'🇸🇳'}, {name:'Sweden', th:'สวีเดน', flag:'🇸🇪'} ] },
+  { id:'E', name:'E TIER', sub:'Long shot', mult:15,
+    teams:[ {name:'Egypt', th:'อียิปต์', flag:'🇪🇬'}, {name:'Australia', th:'ออสเตรเลีย', flag:'🇦🇺'}, {name:'Iran', th:'อิหร่าน', flag:'🇮🇷'}, {name:'Saudi Arabia', th:'ซาอุดีอาระเบีย', flag:'🇸🇦'}, {name:'South Korea', th:'เกาหลีใต้', flag:'🇰🇷'}, {name:'Qatar', th:'กาตาร์', flag:'🇶🇦'}, {name:'Iraq', th:'อิรัก', flag:'🇮🇶'}, {name:'Jordan', th:'จอร์แดน', flag:'🇯🇴'}, {name:'Uzbekistan', th:'อุซเบกิสถาน', flag:'🇺🇿'}, {name:'Algeria', th:'แอลจีเรีย', flag:'🇩🇿'}, {name:'Tunisia', th:'ตูนิเซีย', flag:'🇹🇳'}, {name:'Ivory Coast', th:'ไอวอรีโคสต์', flag:'🇨🇮'}, {name:'DR Congo', th:'คองโก', flag:'🇨🇩'}, {name:'South Africa', th:'แอฟริกาใต้', flag:'🇿🇦'}, {name:'Cape Verde', th:'เคปเวิร์ด', flag:'🇨🇻'}, {name:'Panama', th:'ปานามา', flag:'🇵🇦'}, {name:'Curacao', th:'คูราเซา', flag:'🇨🇼'}, {name:'Haiti', th:'เฮติ', flag:'🇭🇹'}, {name:'Paraguay', th:'ปารากวัย', flag:'🇵🇾'}, {name:'Bosnia and Herzegovina', th:'บอสเนียและเฮอร์เซโกวีนา', flag:'🇧🇦'}, {name:'Scotland', th:'สกอตแลนด์', flag:'🏴'}, {name:'Czech Republic', th:'เช็กเกีย', flag:'🇨🇿'} ] },
+];
+
+const POINTS_TABLE = {
+  R32: 1, R16: 3, QF: 7, SF: 15, RU: 25, CHAMP: 40
+};
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+function goTo(view){
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  const target = document.getElementById('view-' + view);
+  if(target) target.classList.add('active');
+  window.scrollTo({top:0, behavior:'instant'});
+  if(view === 'play'){
+    showSub('rules');
+  }
+  if(view === 'leaderboard'){
+    refreshLeaderboard();
+  }
+}
+
+function showSub(step){
+  document.querySelectorAll('.sub-view').forEach(v => v.classList.add('hidden'));
+  const target = document.getElementById('sub-' + step);
+  if(target) target.classList.remove('hidden');
+
+  // progress bar
+  const order = ['rules','pick','result'];
+  const idx = order.indexOf(step === 'report' ? 'pick' : step);
+  document.querySelectorAll('#progressBar .seg').forEach((seg, i) => {
+    seg.classList.remove('active','done');
+    if(i < idx) seg.classList.add('done');
+    else if(i === idx) seg.classList.add('active');
+  });
+
+  if(step === 'result'){
+    refreshLeaderboard();
+  }
+  window.scrollTo({top:0, behavior:'instant'});
+}
+
+/* =========================================================
+   BUILD RULES TIER TABLE
+========================================================= */
+const tiersContainer = document.getElementById('tiersContainer');
+TIERS.forEach(tier => {
+  const block = document.createElement('div');
+  block.className = `tier-block tier-${tier.id}`;
+  block.innerHTML = `
+    <div class="tier-head">
+      <div class="tier-badge">${tier.id}</div>
+      <div class="tier-name">${tier.name}<span class="sub">${tier.sub}</span></div>
+      <div class="tier-mult">×${tier.mult}</div>
+    </div>
+    <div class="team-grid">
+      ${tier.teams.map(t => `<div class="team-chip"><span class="flag">${t.flag}</span><span>${t.name}</span></div>`).join('')}
+    </div>
+  `;
+  tiersContainer.appendChild(block);
+});
+
+/* =========================================================
+   BUILD PICK TIERS (checkbox grid, max 3)
+========================================================= */
+const pickTiersEl = document.getElementById('pickTiers');
+let selectedTeams = []; // {tierId, mult, name, th, flag}
+
+TIERS.forEach(tier => {
+  const block = document.createElement('div');
+  block.className = `tier-block tier-${tier.id}`;
+
+  const head = document.createElement('div');
+  head.className = 'tier-head';
+  head.innerHTML = `
+    <div class="tier-badge">${tier.id}</div>
+    <div class="tier-name">${tier.name}<span class="sub">${tier.sub}</span></div>
+    <div class="tier-mult">×${tier.mult}</div>
+  `;
+  block.appendChild(head);
+
+  const grid = document.createElement('div');
+  grid.className = 'team-grid';
+
+  tier.teams.forEach(team => {
+    const id = `pick-${tier.id}-${team.name}`;
+    const label = document.createElement('label');
+    label.className = 'team-pick';
+    label.setAttribute('for', id);
+    label.innerHTML = `
+      <input type="checkbox" id="${id}" data-tier="${tier.id}" data-mult="${tier.mult}" data-name="${team.name}" data-th="${team.th}" data-flag="${team.flag}">
+      <span class="flag">${team.flag}</span>
+      <span>${team.name}</span>
+      <span class="mult">×${tier.mult}</span>
+    `;
+    grid.appendChild(label);
+
+    const checkbox = label.querySelector('input');
+    checkbox.addEventListener('change', () => onTeamToggle(checkbox, label));
+  });
+
+  block.appendChild(grid);
+  pickTiersEl.appendChild(block);
+});
+
+function onTeamToggle(checkbox, label){
+  const checkedBoxes = pickTiersEl.querySelectorAll('input[type="checkbox"]:checked');
+  if(checkbox.checked && checkedBoxes.length > 3){
+    checkbox.checked = false;
+    return;
+  }
+  label.classList.toggle('selected', checkbox.checked);
+
+  selectedTeams = Array.from(pickTiersEl.querySelectorAll('input[type="checkbox"]:checked')).map(cb => ({
+    tierId: cb.dataset.tier,
+    mult: parseFloat(cb.dataset.mult),
+    name: cb.dataset.name,
+    th: cb.dataset.th,
+    flag: cb.dataset.flag,
+  }));
+
+  document.getElementById('pickCount').textContent = selectedTeams.length;
+
+  const nameOk = document.getElementById('playerName').value.trim().length > 0;
+  document.getElementById('toReportBtn').disabled = !(selectedTeams.length === 3 && nameOk);
+
+  // disable further checkboxes if 3 reached
+  const allBoxes = pickTiersEl.querySelectorAll('input[type="checkbox"]');
+  allBoxes.forEach(cb => {
+    if(!cb.checked){
+      cb.disabled = selectedTeams.length >= 3;
+      cb.closest('.team-pick').style.opacity = (selectedTeams.length >= 3) ? '0.4' : '1';
+    } else {
+      cb.disabled = false;
+      cb.closest('.team-pick').style.opacity = '1';
+    }
+  });
+}
+
+document.getElementById('playerName').addEventListener('input', () => {
+  const nameOk = document.getElementById('playerName').value.trim().length > 0;
+  document.getElementById('toReportBtn').disabled = !(selectedTeams.length === 3 && nameOk);
+});
+
+/* =========================================================
+   REPORT PAGE
+========================================================= */
+function renderReport(){
+  document.getElementById('reportName').innerHTML =
+    `ผู้เล่น: <b style="color:var(--gold)">${escapeHtml(document.getElementById('playerName').value.trim())}</b> — คุณเลือก 3 ทีมดังนี้`;
+
+  const list = document.getElementById('reportList');
+  list.innerHTML = '';
+  selectedTeams.forEach(t => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <span class="flag">${t.flag}</span>
+      <span>
+        <div class="team-name">${escapeHtml(t.name)}</div>
+        <div class="team-sub">${escapeHtml(t.th)}</div>
+      </span>
+      <span class="pill pill-${t.tierId}">เทียร์ ${t.tierId}</span>
+    `;
+    list.appendChild(li);
+  });
+
+  showSub('report');
+}
+
+/* =========================================================
+   STORAGE / LEADERBOARD
+   Entry shape stored under key "entries:<name>" (shared=true):
+   { name, teams:[{tierId,mult,name,th,flag}], submittedAt }
+
+   Live results (admin-editable elsewhere or default mock) under "results" (shared=true):
+   { "Spain": "CHAMP", "France": "RU", ... } -> stage code
+========================================================= */
+// ============================================================
+// 🔧 SETUP: paste your Google Apps Script Web App URL here
+// ============================================================
+const API_URL = 'https://script.google.com/macros/s/AKfycbylPhgYgyK48JdjIqcHIUHziol2bQCilyPIoazloQPi-UlJ7ZGQUkNn8LOyKHqbyUeldw/exec';
+
+let localEntriesFallback = []; // used only if API_URL is not configured / unreachable
+
+// default mock results so the board isn't empty before real results are entered
+const DEFAULT_RESULTS = {};
+
+function apiConfigured(){
+  return API_URL && API_URL.startsWith('http');
+}
+
+async function submitEntry(){
+  const name = document.getElementById('playerName').value.trim();
+  if(!name || selectedTeams.length !== 3) return;
+
+  const entry = {
+    name: name,
+    teams: selectedTeams,
+    submittedAt: new Date().toISOString()
+  };
+
+  let saved = false;
+  if(apiConfigured()){
+    try{
+      const res = await fetch(API_URL + '?action=addEntry&data=' + encodeURIComponent(JSON.stringify(entry)));
+      const json = await res.json();
+      if(json && json.ok) saved = true;
+    }catch(e){
+      console.error('Save error:', e.message || e);
+    }
+  }
+
+  if(!saved){
+    // fallback: keep in memory for this session so the demo still works
+    localEntriesFallback = localEntriesFallback.filter(en => en.name !== name);
+    localEntriesFallback.push(entry);
+  }
+
+  showSub('result');
+}
+
+async function getResults(){
+  if(apiConfigured()){
+    try{
+      const res = await fetch(API_URL + '?action=getResults');
+      const json = await res.json();
+      if(json && json.results) return json.results;
+    }catch(e){
+      console.error('Results fetch error:', e.message || e);
+    }
+  }
+  return DEFAULT_RESULTS;
+}
+
+async function getAllEntries(){
+  let entries = [];
+
+  if(apiConfigured()){
+    try{
+      const res = await fetch(API_URL + '?action=getEntries');
+      const json = await res.json();
+      if(json && json.entries) entries = json.entries;
+    }catch(e){
+      console.error('Entries fetch error:', e.message || e);
+    }
+  }
+
+  // merge in-memory fallback entries (avoid duplicates by name)
+  localEntriesFallback.forEach(fallbackEntry => {
+    if(!entries.find(en => en.name === fallbackEntry.name)){
+      entries.push(fallbackEntry);
+    }
+  });
+
+  return entries;
+}
+
+function stagePoints(stageCode){
+  return POINTS_TABLE[stageCode] || 0;
+}
+
+async function computeLeaderboard(){
+  const [entries, results] = await Promise.all([getAllEntries(), getResults()]);
+
+  const rows = entries.map(entry => {
+    let total = 0;
+    const teamDetails = entry.teams.map(t => {
+      const stage = results[t.name] || null;
+      const base = stage ? stagePoints(stage) : 0;
+      const score = base * t.mult;
+      total += score;
+      return { ...t, stage, base, score };
+    });
+    return { name: entry.name, teams: teamDetails, total, submittedAt: entry.submittedAt };
+  });
+
+  rows.sort((a,b) => b.total - a.total);
+  return rows;
+}
+
+const STAGE_LABEL = {
+  R32: 'รอบ 32 ทีม', R16: 'รอบ 16 ทีม', QF: 'รอบ 8 ทีม', SF: 'รอบรองฯ', RU: 'รองแชมป์', CHAMP: 'แชมป์'
+};
+
+function renderScoreboard(targetWrap, rows){
+  if(rows.length === 0){
+    targetWrap.innerHTML = `<div class="empty-state">ยังไม่มีผู้เล่นลงทะเบียน — เป็นคนแรกที่ร่วมสนุกเลย!</div>`;
+    return;
+  }
+
+  let html = `<table class="scoreboard"><tr><th>อันดับ</th><th>ผู้เล่น</th><th>ทีมที่เลือก</th><th style="text-align:right;">คะแนนรวม</th></tr>`;
+  rows.forEach((row, i) => {
+    const rankClass = i === 0 ? 'r1' : i === 1 ? 'r2' : i === 2 ? 'r3' : '';
+    const teamsStr = row.teams.map(t => {
+      const stageLabel = t.stage ? STAGE_LABEL[t.stage] : 'รอผล';
+      return `${t.flag} ${t.name} (${stageLabel}${t.stage ? ' · '+t.score : ''})`;
+    }).join(' &nbsp;·&nbsp; ');
+    html += `<tr class="${rankClass}">
+      <td class="rank">${i+1}</td>
+      <td>${escapeHtml(row.name)}</td>
+      <td class="teams">${teamsStr}</td>
+      <td class="score">${row.total.toFixed(1).replace(/\.0$/,'')}</td>
+    </tr>`;
+  });
+  html += `</table>`;
+  targetWrap.innerHTML = html;
+}
+
+async function refreshLeaderboard(){
+  const rows = await computeLeaderboard();
+  const now = new Date();
+  const ts = now.toLocaleString('th-TH', {dateStyle:'medium', timeStyle:'short'});
+
+  const wrap1 = document.getElementById('scoreboardWrap');
+  const wrap2 = document.getElementById('scoreboardWrap2');
+  if(wrap1) renderScoreboard(wrap1, rows);
+  if(wrap2) renderScoreboard(wrap2, rows);
+
+  const u1 = document.getElementById('lastUpdated');
+  const u2 = document.getElementById('lastUpdated2');
+  if(u1) u1.textContent = 'อัปเดตล่าสุด: ' + ts;
+  if(u2) u2.textContent = 'อัปเดตล่าสุด: ' + ts;
+
+  if(!apiConfigured()){
+    const warning = `<div style="margin-top:14px; padding:12px 14px; border-radius:10px; background:rgba(192,32,43,0.15); border:1px solid rgba(192,32,43,0.4); font-size:12.5px; color:#ffb3b8;">
+      ⚠️ ยังไม่ได้เชื่อมต่อฐานข้อมูล (API_URL) — ข้อมูลตอนนี้จะหายเมื่อรีโหลดหน้า
+    </div>`;
+    if(wrap1) wrap1.insertAdjacentHTML('beforeend', warning);
+    if(wrap2) wrap2.insertAdjacentHTML('beforeend', warning);
+  }
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// initial leaderboard load (in case user lands on leaderboard first)
+refreshLeaderboard();
+</script>
+</body>
+</html>
